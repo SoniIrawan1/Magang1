@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none; 
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .toggle-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            color: #007bff;
+        }
+        .toggle-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="registerContainer" class="container">
+        <h2>Register</h2>
+        <div class="form-group">
+            <label for="regEmail">Email:</label>
+            <input type="email" id="regEmail" required>
+        </div>
+        <div class="form-group">
+            <label for="regPassword">Password:</label>
+            <input type="password" id="regPassword" required>
+        </div>
+        <button class="btn" onclick="register()">Register</button>
+        <div class="toggle-link" onclick="toggleForm()">Sudah punya akun? Login</div>
+    </div>
+    <div id="loginContainer" class="container">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label for="logEmail">Email:</label>
+            <input type="email" id="logEmail" required>
+        </div>
+        <div class="form-group">
+            <label for="logPassword">Password:</label>
+            <input type="password" id="logPassword" required>
+        </div>
+        <button class="btn" onclick="login()">Login</button>
+        <div class="toggle-link" onclick="toggleForm()">Belum punya akun? Register</div>
+    </div>
+
+    <script>
+        // Display the register form by default
+        document.getElementById('registerContainer').style.display = 'block';
+
+        // Function to toggle between login and register forms
+        function toggleForm() {
+            const registerContainer = document.getElementById('registerContainer');
+            const loginContainer = document.getElementById('loginContainer');
+            if (registerContainer.style.display === 'block') {
+                registerContainer.style.display = 'none';
+                loginContainer.style.display = 'block';
+            } else {
+                registerContainer.style.display = 'block';
+                loginContainer.style.display = 'none';
+            }
+        }
+
+        // Hardcoded credentials
+        const superadmin = { email: 'superadmin@gmail.com', password: 'superadmin', role: 'superadmin' };
+        const admin = { email: 'admin@gmail.com', password: 'admin', role: 'admin' };
+
+        // Register function
+        function register() {
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            // Simple validation
+            if (email && password) {
+                alert('Registered successfully! Please login.');
+                // For simplicity, assuming all new registrations are users
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        // Login function
+        function login() {
+            const email = document.getElementById('logEmail').value;
+            const password = document.getElementById('logPassword').value;
+
+            if (email === superadmin.email && password === superadmin.password) {
+                alert('Welcome Superadmin!');
+                window.location.href = 'superadmin.html';
+            } else if (email === admin.email && password === admin.password) {
+                alert('Welcome Admin!');
+                window.location.href = 'admin.html';
+            } else if (email && password) {
+                alert('Welcome User!');
+                window.location.href = 'user.html';
+            } else {
+                alert('Invalid email or password.');
+            }
+        }
+    </script>
+</body>
+</html>
